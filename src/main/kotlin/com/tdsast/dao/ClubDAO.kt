@@ -24,7 +24,7 @@ interface ClubDAO {
     /**
      * 根据名称获取社团
      */
-    suspend fun clubByName(name: String): Club?
+    suspend fun clubByName(name: String): List<Club>
 
     /**
      * 添加社团
@@ -62,7 +62,6 @@ class ClubDAOImpl : ClubDAO {
         Clubs
             .select { Clubs.name eq name }
             .map(::resultRowToClub)
-            .singleOrNull()
     }
 
     override suspend fun addClub(club: Club) = dbQuery {

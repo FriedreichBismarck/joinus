@@ -59,7 +59,16 @@ class ClubDAOTest {
 
     @Test
     fun `test clubByName`() {
-        TODO("not implemented")
+        val list = listOf("Club 1", "Club 1", "Club 2", "Club 3")
+        list.map { e ->
+            val insertStatement = transaction { Clubs.insert { it[name] = e } }
+            insertStatement.resultedValues?.singleOrNull()?.get(Clubs.id)!!
+        }
+        val dao = ClubDAOImpl()
+        list.forEach { e ->
+            val result = runBlocking { dao.clubByName(e) }
+            assertEquals(list.filter { it == e }.size, result.size)
+        }
     }
 
     @Test
