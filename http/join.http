@@ -1,0 +1,15 @@
+### 申请加入
+POST http://localhost:8080/join
+Content-Type: application/json
+
+{
+  "name": "张三",
+  "student_id": "12345678",
+  "club": 1,
+  "phone": "123456",
+  "qq": "123",
+  "counselor": "123",
+  "first_choice": 1,
+  "second_choice": 1,
+  "reason": "学不死就往死里学"
+}

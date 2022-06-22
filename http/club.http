@@ -1,0 +1,10 @@
+### 获取所有社团
+GET http://localhost:8080/club
+
+### 根据 ID 获取社团
+GET http://localhost:8080/club/2
+
+### 添加社团
+
+### 根据 ID 删除社团
+DELETE http://localhost:8080/club/2

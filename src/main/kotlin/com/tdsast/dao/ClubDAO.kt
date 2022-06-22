@@ -8,6 +8,7 @@ import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
+import org.slf4j.LoggerFactory
 
 interface ClubDAO {
 
@@ -38,6 +39,7 @@ interface ClubDAO {
 }
 
 class ClubDAOImpl : ClubDAO {
+    val logger = LoggerFactory.getLogger(javaClass)
 
     private fun resultRowToClub(row: ResultRow) = Club(
         id = row[Clubs.id],
@@ -71,7 +73,12 @@ class ClubDAOImpl : ClubDAO {
     }
 
     override suspend fun deleteClub(id: Long) = dbQuery {
-        Clubs
-            .deleteWhere { Clubs.id eq id } > 0
+        var result = false
+        try {
+            result = Clubs.deleteWhere { Clubs.id eq id } > 0
+        } catch (e: Exception) {
+            logger.error("删除社团失败", e)
+        }
+        result
     }
 }

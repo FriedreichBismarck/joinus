@@ -1,5 +1,6 @@
 package com.tdsast.plugins
 
+import com.tdsast.router.clubRouter
 import com.tdsast.router.join
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
@@ -14,5 +15,6 @@ fun Application.configureRouting() {
             call.respondText("Hello World!")
         }
         join()
+        clubRouter()
     }
 }

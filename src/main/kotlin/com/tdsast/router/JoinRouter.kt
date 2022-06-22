@@ -50,17 +50,17 @@ fun Routing.join() {
                 val candidateDao = CandidateDaoImpl()
                 result = candidateDao.addNewCandidate(candidate)
             } catch (e: ElementNotFoundException) {
-                logger.error("Error adding candidate: ${e.message}")
+                logger.info("Error adding candidate: ${e.message}")
                 return@post call.respond(HttpStatusCode.NotFound, JoinReturn.error("数据不存在"))
             } catch (e: Exception) {
-                logger.error(e.message)
+                logger.info(e.message)
                 return@post call.respond(HttpStatusCode.BadRequest, JoinReturn.error("数据错误"))
             }
             if (result != null) {
                 logger.info("Successfully added candidate: $candidate")
                 return@post call.respond(HttpStatusCode.Accepted, JoinReturn.success("申请成功"))
             } else {
-                logger.error("Failed to add candidate: $candidate")
+                logger.info("Failed to add candidate: $candidate")
                 return@post call.respond(HttpStatusCode.InternalServerError, JoinReturn.error("申请失败"))
             }
         }
