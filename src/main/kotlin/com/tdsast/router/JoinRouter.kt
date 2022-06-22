@@ -7,6 +7,7 @@ import com.tdsast.dao.exceptions.ElementNotFoundException
 import com.tdsast.model.Candidate
 import com.tdsast.model.dto.JoinRequest
 import com.tdsast.model.dto.JoinReturn
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
@@ -50,21 +51,18 @@ fun Routing.join() {
                 result = candidateDao.addNewCandidate(candidate)
             } catch (e: ElementNotFoundException) {
                 logger.error("Error adding candidate: ${e.message}")
-                call.respond(JoinReturn.error("数据不存在"))
-                return@post
+                return@post call.respond(HttpStatusCode.NotFound, JoinReturn.error("数据不存在"))
             } catch (e: Exception) {
                 logger.error(e.message)
-                call.respond(JoinReturn.error("数据错误"))
-                return@post
+                return@post call.respond(HttpStatusCode.BadRequest, JoinReturn.error("数据错误"))
             }
             if (result != null) {
                 logger.info("Successfully added candidate: $candidate")
-                call.respond(JoinReturn.success("申请成功"))
+                return@post call.respond(HttpStatusCode.Accepted, JoinReturn.success("申请成功"))
             } else {
-                logger.info("Failed to add candidate: $candidate")
-                call.respond(JoinReturn.error("申请失败"))
+                logger.error("Failed to add candidate: $candidate")
+                return@post call.respond(HttpStatusCode.InternalServerError, JoinReturn.error("申请失败"))
             }
-            return@post
         }
     }
 
