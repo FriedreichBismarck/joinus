@@ -1,5 +1,6 @@
 package com.tdsast.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Table
 
@@ -16,6 +17,7 @@ data class Candidate(
     /**
      * 学号
      */
+    @SerialName("student_id")
     val studentId: String,
     /**
      * 社团
@@ -36,10 +38,12 @@ data class Candidate(
     /**
      * 第一志愿
      */
+    @SerialName("first_choice")
     val firstChoice: Department,
     /**
      * 第二志愿
      */
+    @SerialName("second_choice")
     val secondChoice: Department,
     /**
      * 加入原因

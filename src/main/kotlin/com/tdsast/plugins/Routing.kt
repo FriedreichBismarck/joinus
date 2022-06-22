@@ -1,5 +1,6 @@
 package com.tdsast.plugins
 
+import com.tdsast.router.join
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
 import io.ktor.server.response.respondText
@@ -12,5 +13,7 @@ fun Application.configureRouting() {
         get("/") {
             call.respondText("Hello World!")
         }
+        join()
     }
+
 }

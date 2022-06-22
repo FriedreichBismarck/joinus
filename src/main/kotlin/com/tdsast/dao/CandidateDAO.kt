@@ -1,6 +1,7 @@
 package com.tdsast.dao
 
 import com.tdsast.dao.DatabaseFactory.dbQuery
+import com.tdsast.dao.exceptions.ElementNotFoundException
 import com.tdsast.model.Candidate
 import com.tdsast.model.Candidates
 import kotlinx.coroutines.runBlocking
@@ -45,24 +46,25 @@ interface CandidateDAO {
 }
 
 class CandidateDaoImpl : CandidateDAO {
-    private fun resultRowToCandidate(row: ResultRow) = Candidate(
-        id = row[Candidates.id],
-        name = row[Candidates.name],
-        studentId = row[Candidates.studentId],
-        club = runBlocking {
-            ClubDAOImpl().clubById(row[Candidates.club])!!
-        },
-        phone = row[Candidates.phone],
-        qq = row[Candidates.qq],
-        counselor = row[Candidates.counselor],
-        firstChoice = runBlocking {
-            DepartmentDAOImpl().departmentById(row[Candidates.firstChoice])!!
-        },
-        secondChoice = runBlocking {
-            DepartmentDAOImpl().departmentById(row[Candidates.secondChoice])!!
-        },
-        reason = row[Candidates.reason]
-    )
+    private fun resultRowToCandidate(row: ResultRow): Candidate {
+        val id = row[Candidates.id]
+        val name = row[Candidates.name]
+        val studentId = row[Candidates.studentId]
+        val club = runBlocking {
+            ClubDAOImpl().clubById(row[Candidates.club])
+        } ?: throw ElementNotFoundException("Club")
+        val phone = row[Candidates.phone]
+        val qq = row[Candidates.qq]
+        val counselor = row[Candidates.counselor]
+        val firstChoice = runBlocking {
+            DepartmentDAOImpl().departmentById(row[Candidates.firstChoice])
+        } ?: throw ElementNotFoundException("Department")
+        val secondChoice = runBlocking {
+            DepartmentDAOImpl().departmentById(row[Candidates.secondChoice])
+        } ?: throw ElementNotFoundException("Department")
+        val reason = row[Candidates.reason]
+        return Candidate(id, name, studentId, club, phone, qq, counselor, firstChoice, secondChoice, reason)
+    }
 
     override suspend fun allCandidates() = dbQuery {
         Candidates
