@@ -9,6 +9,7 @@ plugins {
     application
     kotlin("jvm") version "1.7.0"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.0"
+    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
 }
 
 group = "com.tdsast"

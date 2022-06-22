@@ -1,15 +1,15 @@
 package com.tdsast.dao
 
 import com.tdsast.model.Clubs
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertContains
-import kotlin.test.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.exposed.sql.deleteAll
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.BeforeClass
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertContains
+import kotlin.test.assertEquals
 
 class ClubDAOTest {
     companion object {
@@ -80,5 +80,4 @@ class ClubDAOTest {
     fun `test deleteClub`() {
         TODO("not implemented")
     }
-
 }

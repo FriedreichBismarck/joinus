@@ -36,7 +36,6 @@ interface DepartmentDAO {
      * 删除部门
      */
     suspend fun deleteDepartment(id: Long): Boolean
-
 }
 
 class DepartmentDAOImpl : DepartmentDAO {
@@ -81,5 +80,4 @@ class DepartmentDAOImpl : DepartmentDAO {
         Departments
             .deleteWhere { Departments.id eq id } > 0
     }
-
 }

@@ -3,15 +3,15 @@ package com.tdsast.dao
 import com.tdsast.model.Club
 import com.tdsast.model.Clubs
 import com.tdsast.model.Departments
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.exposed.sql.deleteAll
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.BeforeClass
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class DepartmentDAOTest {
 
@@ -74,5 +74,4 @@ class DepartmentDAOTest {
     fun `test deleteDepartment`() {
         TODO("not implemented")
     }
-
 }

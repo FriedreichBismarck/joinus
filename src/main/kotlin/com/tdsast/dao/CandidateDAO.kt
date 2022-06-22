@@ -42,7 +42,6 @@ interface CandidateDAO {
      * 根据 id 删除候选人
      */
     suspend fun deleteCandidateById(id: Long): Boolean
-
 }
 
 class CandidateDaoImpl : CandidateDAO {
@@ -110,5 +109,4 @@ class CandidateDaoImpl : CandidateDAO {
         Candidates
             .deleteWhere { Candidates.id eq id } > 0
     }
-
 }

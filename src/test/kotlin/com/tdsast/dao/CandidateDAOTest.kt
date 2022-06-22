@@ -1,11 +1,11 @@
 package com.tdsast.dao
 
 import com.tdsast.model.Candidates
-import kotlin.test.BeforeTest
-import kotlin.test.Test
 import org.jetbrains.exposed.sql.deleteAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.BeforeClass
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 
 class CandidateDAOTest {
 
@@ -53,5 +53,4 @@ class CandidateDAOTest {
     fun `test deleteCandidateById`() {
         TODO("not implemented")
     }
-
 }

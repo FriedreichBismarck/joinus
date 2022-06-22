@@ -35,7 +35,6 @@ interface ClubDAO {
      * 根据 ID 删除社团
      */
     suspend fun deleteClub(id: Long): Boolean
-
 }
 
 class ClubDAOImpl : ClubDAO {
@@ -75,5 +74,4 @@ class ClubDAOImpl : ClubDAO {
         Clubs
             .deleteWhere { Clubs.id eq id } > 0
     }
-
 }
