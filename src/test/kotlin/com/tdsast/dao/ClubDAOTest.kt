@@ -10,6 +10,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class ClubDAOTest {
     companion object {
@@ -55,6 +56,9 @@ class ClubDAOTest {
             val result = runBlocking { dao.clubById(ids[index]) }
             assertEquals(e, result?.name)
         }
+
+        // test not found
+        assertNull(runBlocking { dao.clubById(ids[ids.size - 1] + 10) })
     }
 
     @Test
@@ -69,6 +73,9 @@ class ClubDAOTest {
             val result = runBlocking { dao.clubByName(e) }
             assertEquals(list.filter { it == e }.size, result.size)
         }
+
+        // test not found
+        assertEquals(0, runBlocking { dao.clubByName("Club 10") }.size)
     }
 
     @Test

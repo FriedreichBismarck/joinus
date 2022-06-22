@@ -20,7 +20,12 @@ fun Routing.clubRouter() {
         }
 
         get("{id?}") {
-            val id = call.parameters["id"]?.toLong() ?: -1
+            val id: Long
+            try {
+                id = call.parameters["id"]?.toLong() ?: -1
+            } catch (_: Exception) {
+                return@get call.respond(HttpStatusCode.BadRequest, ClubReturn.error("ID不合法"))
+            }
             if (id == -1L) {
                 return@get call.respond(HttpStatusCode.BadRequest, ClubReturn.error("ID不合法"))
             }
